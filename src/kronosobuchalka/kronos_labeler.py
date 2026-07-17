@@ -98,7 +98,7 @@ def label_symbol_frame(
         start_ts = pd.Timestamp(from_time)
         candidates = frame.index[frame["timestamps"] >= start_ts].tolist()
         if candidates:
-            start_idx = max(start_idx, int(candidates[0]) - 1)
+            start_idx = max(start_idx, int(candidates[0]))
     end_idx = len(frame) - max(int(config.pred_len), 1) - 1
     if till_time:
         till_ts = pd.Timestamp(till_time)
@@ -331,4 +331,3 @@ def _mean(values: Iterable[Any]) -> float:
 def _mean_bool(values: Iterable[Any]) -> float:
     series = pd.Series(values).dropna()
     return float(series.astype(bool).mean()) if len(series) else math.nan
-
